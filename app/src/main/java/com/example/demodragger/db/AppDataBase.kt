@@ -12,6 +12,7 @@ import com.example.demodragger.helper.ioThread
 @Database(entities = [User::class], version = 1)
 abstract class AppDataBase : RoomDatabase(){
 
+    // Getting  UserDao
     abstract fun getUserDao(): UserDao
 
     companion object {
@@ -19,6 +20,7 @@ abstract class AppDataBase : RoomDatabase(){
         @Volatile
         private var INSTANCE: AppDataBase? = null
 
+        // Method for Instantiate database
         fun getDataBase(context: Context): AppDataBase{
             val tempInstance = INSTANCE
             if (tempInstance != null){
@@ -42,6 +44,7 @@ abstract class AppDataBase : RoomDatabase(){
             }
         }
 
+        // User Data List
         val USER_LIST = listOf(User(1, "vignesh", "vignesh"), User(2, "jaya", "jaya"))
     }
 }

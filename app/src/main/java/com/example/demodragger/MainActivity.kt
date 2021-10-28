@@ -19,16 +19,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    /*Inject fragment object.*/
+    // Inject fragment object
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
     }
 
+    // Xml
     override fun getContentView(): Int = R.layout.activity_main
 
+    // ViewModel
     override fun getViewModel(): MainViewModel? =
         ViewModelProvider(this).get(MainViewModel::class.java)
 
+    // Binding Variable
     override fun getBindingVariable(): Int = BR.mainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

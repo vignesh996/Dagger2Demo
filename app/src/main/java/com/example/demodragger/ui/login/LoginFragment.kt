@@ -16,14 +16,18 @@ import javax.inject.Inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), LoginViewModel.AuthResponse {
 
+    // ViewModel Factory Injection
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
+    // viewModel
     override fun getViewModel(): LoginViewModel? =
         ViewModelProvider(this,factory).get(LoginViewModel::class.java)
 
+    // Binding Variable
     override fun getBindingVariable(): Int =BR.loginViewModel
 
+    // Attach Xml file
     override fun getContentView(): Int = R.layout.fragment_login
 
     override fun onAttach(context: Context) {
@@ -34,17 +38,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Logi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Instantiate AuthResponse Interface
+        // Instantiate Authentication Response Interface
         getViewModel()?.setAuthResponse(this)
-        // Login Button Listener
+
         onClickLoginBtn()
 
 
     }
 
+    // Login Button Listener
     private fun onClickLoginBtn(){
         mDataBinding!!.loginBtn.setOnClickListener {
-            // Getting User Inputs
             getViewModel()?.getUserData(mDataBinding!!)
         }
     }

@@ -3,6 +3,7 @@ package com.example.demodragger.ui.login
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.demodragger.base.BaseViewModel
 import com.example.demodragger.databinding.FragmentLoginBinding
 import com.example.demodragger.db.entities.User
@@ -23,19 +24,19 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         Log.d("TAG", "view model login called ")
     }
 
+    // Getting User Inputs
     fun getUserData(mDataBinding: FragmentLoginBinding) {
         var name = userName.value
         var password = password.value
 
-        //User Inputs Validation
         userInputValidation(name,password,mDataBinding)
     }
 
+    //User Inputs Validation
     private fun userInputValidation(name: String?, password: String?, mDataBinding: FragmentLoginBinding) {
         if (!name.isNullOrEmpty()){
             if (!password.isNullOrEmpty()){
                 if (password.length >3){
-                        // User Authentication Method
                         userAuth(name,password)
                 }else{
                     mDataBinding.etPass.error ="Password Wrong!"
@@ -48,21 +49,22 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         }
     }
 
+    // User Authentication Method
     private fun userAuth(name: String, password: String) {
-        GlobalScope.launch(Dispatchers.Main) {
-            // Authentication from Database
+        viewModelScope.launch(Dispatchers.Main) {
             var user  = authenticate(name, password)
-            // Set Authentication Result
             authResult(user)
         }
     }
 
+    // Authentication from Database
     private suspend fun authenticate(name: String, password: String): User{
         return withContext(Dispatchers.IO){
             return@withContext loginRepository.userAuth(name,password)
         }
     }
 
+    // Set Authentication Result
     private fun authResult(user : User){
         if (user ==  null){
             toastMessage = "Invalid User Data"
@@ -82,8 +84,4 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         fun response()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("TAG", "view model clear method called ")
-    }
 }

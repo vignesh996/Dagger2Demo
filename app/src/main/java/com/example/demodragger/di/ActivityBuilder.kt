@@ -7,6 +7,7 @@ import com.example.demodragger.ui.login.LoginModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
+// This Activity Builder abstract class provide all Activity & Fragment Level injection Modules
 @Module
 abstract class ActivityBuilder {
 

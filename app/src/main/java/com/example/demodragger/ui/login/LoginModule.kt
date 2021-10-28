@@ -10,10 +10,11 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-
+// This Module Provides All Login Fragment Injection Objects
 @Module
 class LoginModule {
 
+    // Provides Login ViewModel Factory
     @Provides
     fun provideViewModelProvider(viewModel: LoginViewModel): ViewModelProvider.Factory {
         return ViewModelProviderFactory(viewModel)

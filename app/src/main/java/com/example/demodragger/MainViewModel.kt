@@ -8,8 +8,11 @@ import com.example.demodragger.base.BaseViewModel
 class MainViewModel constructor(app: Application):BaseViewModel(app) {
 
     init {
-
         Log.d("TAG", "view model main activity called ")
+    }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("TAG", "view model main activity oncleared called ")
     }
 }

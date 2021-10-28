@@ -19,6 +19,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "base_url", "\"https://scl-sandbox.dev.clover.com/\""
+        buildConfigField "String", "base_url_prod", "\"https://api.clover.com/\""
     }
 
     buildTypes {
