@@ -14,6 +14,7 @@ import javax.inject.Singleton
 @Module
 class LoginModule {
 
+
     // Provides Login ViewModel Factory
     @Provides
     fun provideViewModelProvider(viewModel: LoginViewModel): ViewModelProvider.Factory {
