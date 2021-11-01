@@ -1,12 +1,10 @@
 package com.example.demodragger
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.demodragger.base.BaseActivity
 import com.example.demodragger.databinding.ActivityMainBinding
-import com.example.demodragger.db.AppDataBase
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

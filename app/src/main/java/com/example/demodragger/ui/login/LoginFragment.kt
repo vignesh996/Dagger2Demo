@@ -4,17 +4,19 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.demodragger.BR
 import com.example.demodragger.R
 import com.example.demodragger.base.BaseFragment
 import com.example.demodragger.databinding.FragmentLoginBinding
+import com.example.mydatabaselibrary.db.entities.LogNotes
 import dagger.android.support.AndroidSupportInjection
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), LoginViewModel.AuthResponse {
+open class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), LoginViewModel.AuthResponse {
 
     // ViewModel Factory Injection
     @Inject
@@ -22,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Logi
 
     // viewModel
     override fun getViewModel(): LoginViewModel? =
-        ViewModelProvider(this,factory).get(LoginViewModel::class.java)
+        ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
     // Binding Variable
     override fun getBindingVariable(): Int =BR.loginViewModel
@@ -38,11 +40,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Logi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Instantiate Authentication Response Interface
+        // Authentication Response Interface Instantiation
         getViewModel()?.setAuthResponse(this)
 
         onClickLoginBtn()
-
 
     }
 
@@ -53,9 +54,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(), Logi
         }
     }
 
-    // Authentication Result CallBack
+    // Authentication Response CallBack
     override fun response() {
         getViewModel()?.toastMessage?.let { showToast(it) }
+
+        // Printing Log Data's inside the Logcat
+        getViewModel()?.getLogNotes()
 
     }
 
