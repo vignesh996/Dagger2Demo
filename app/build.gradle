@@ -127,5 +127,6 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
 
-    implementation project(":MyDatabaseLibrary")
+    implementation 'com.github.vignesh996:Dagger2Demo:version0.0.0'
+//    implementation project(":MyDatabaseLibrary")
 }

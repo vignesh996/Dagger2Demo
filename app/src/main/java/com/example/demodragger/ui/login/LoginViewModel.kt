@@ -70,12 +70,12 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         if (user ==  null){
             toastMessage = "Invalid User Data"
             var note =LogNotes(getDate(), getTime(), "warning",
-                    classDetails[0].fileName, classDetails[0].methodName, classDetails[0].lineNumber.toString())
+                    classDetails[0].fileName,Throwable().stackTrace[0].methodName, Throwable().stackTrace[0].lineNumber.toString())
             insertLog(note)
         }else{
             toastMessage = "Login Successfully"
             var note =LogNotes(getDate(), getTime(), "warning",
-                    classDetails[0].fileName, classDetails[0].methodName, classDetails[0].lineNumber.toString())
+                    classDetails[0].fileName, Throwable().stackTrace[0].methodName, Throwable().stackTrace[0].lineNumber.toString())
             insertLog(note)
         }
         authResponse?.response()
